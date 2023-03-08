@@ -1,8 +1,10 @@
 package com.crmapp.crmbackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,9 +28,10 @@ public class Contact {
     private String contactOwner;
 @Column
     private String company;
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "participants")
-    private Set<ActivitiesEntity> activities;
+    @Column
+    private Set<ActivitiesEntity> activities = new HashSet<>();
     public Contact() {
 
     }

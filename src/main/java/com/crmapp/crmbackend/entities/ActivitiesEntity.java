@@ -3,6 +3,7 @@ package com.crmapp.crmbackend.entities;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,25 +23,28 @@ public class ActivitiesEntity {
     private String note;
     @Column
     private String document;
-    @ManyToMany(cascade = {CascadeType.MERGE})
+
+
+
+
+    @ManyToMany()
     @JoinTable(
             name = "activity_participant",
             joinColumns = @JoinColumn(name = "activity_id"),
             inverseJoinColumns = @JoinColumn(name = "contact_id")
     )
-    private Set<Contact> participants;
+    private Set<Contact> participants = new HashSet<>();
     public ActivitiesEntity() {
 
     }
 
-    public ActivitiesEntity(Long id, Date date, String type, String subject, String note, String document, Set<Contact> participants) {
+    public ActivitiesEntity(Long id, Date date, String type, String subject, String note, String document) {
         this.id = id;
         this.date = date;
         this.type = type;
         this.subject = subject;
         this.note = note;
         this.document = document;
-        this.participants = participants;
     }
 
     public Long getId() {

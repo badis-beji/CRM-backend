@@ -35,4 +35,5 @@ public class ContactController {
     public  void deleteContact(@PathVariable Long id){
         contactService.deleteContact(id);
     }
+
 }
